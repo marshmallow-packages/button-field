@@ -14,10 +14,12 @@
 </template>
 
 <script>
-import ButtonComponent from "./ButtonComponent";
+    import { FormField } from "laravel-nova";
+    import ButtonComponent from "./ButtonComponent";
 
-export default {
-    props: ["resourceName", "field"],
-    components: { ButtonComponent },
-};
+    export default {
+        mixins: [FormField],
+        props: ["resourceName", "field"],
+        components: { ButtonComponent },
+    };
 </script>
