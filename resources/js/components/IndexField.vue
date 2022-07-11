@@ -1,9 +1,15 @@
 <template>
-    <span>{{ field.value }}</span>
+    <ButtonComponent
+        :field="field"
+        :resourceName="resourceName"
+    ></ButtonComponent>
 </template>
 
 <script>
-export default {
-    props: ['resourceName', 'field'],
-}
+    import ButtonComponent from "./ButtonComponent";
+    export default {
+        props: ["resourceName", "field"],
+
+        components: { ButtonComponent },
+    };
 </script>
