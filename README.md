@@ -1,6 +1,6 @@
 ![alt text](https://marshmallow.dev/cdn/media/logo-red-237x46.png "marshmallow.")
 
-# Marshmallow Deployer
+# Nova Button Package
 
 [![Version](https://img.shields.io/packagist/v/marshmallow/button-field)](https://github.com/marshmallow-packages/button-field)
 [![Issues](https://img.shields.io/github/issues/marshmallow-packages/button-field)](https://github.com/marshmallow-packages/button-field)
