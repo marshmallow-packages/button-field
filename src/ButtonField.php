@@ -20,6 +20,9 @@ class ButtonField extends Field
         $this->hideWhenCreating()
             ->button()
             ->target('_blank')
+            ->fillUsing(function () {
+                // Disable updates on the model
+            })
             ->setButtonText(
                 __('Download')
             );
