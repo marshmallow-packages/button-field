@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="field.available">
         <a
             v-if="field.button_type == 'button'"
             size="lg"
@@ -37,6 +37,9 @@
                 {{ field.button }}
             </span>
         </a>
+    </div>
+    <div v-else-if="field.not_available_text">
+        {{ field.not_available_text }}
     </div>
 </template>
 

@@ -3,6 +3,7 @@
 namespace Marshmallow\ButtonField;
 
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class ButtonField extends Field
 {
@@ -19,6 +20,8 @@ class ButtonField extends Field
 
         $this->hideWhenCreating()
             ->button()
+            ->available(true)
+            ->notAvailableText('n/a')
             ->target('_blank')
             ->fillUsing(function () {
                 // Disable updates on the model
@@ -26,6 +29,31 @@ class ButtonField extends Field
             ->setButtonText(
                 __('Download')
             );
+    }
+
+    public function visibleWhen(callable $callable, string $not_available_text)
+    {
+        if (!$callable()) {
+            $this->available(false)
+                ->notAvailableText($not_available_text);
+        }
+        return $this;
+    }
+
+    public function available(bool $available = true)
+    {
+        $this->withMeta([
+            'available' => $available,
+        ]);
+        return $this;
+    }
+
+    public function notAvailableText(string $not_available_text)
+    {
+        $this->withMeta([
+            'not_available_text' => $not_available_text,
+        ]);
+        return $this;
     }
 
     public function setButtonText($text)
