@@ -70,8 +70,12 @@ class ButtonField extends Field
         return $this->setButtonType('button');
     }
 
-    public function download()
+    public function download(string $download_name = null)
     {
+        $this->withMeta([
+            'download_name' => $download_name ?? 'download',
+        ]);
+
         return $this->setButtonType('download');
     }
 
