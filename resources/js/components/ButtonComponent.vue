@@ -19,7 +19,7 @@
             class="inline-flex items-center cursor-pointer dim btn btn-link text-primary"
             :href="!field.action_class_name ? field.value : 'javascript:;'"
             :target="field.button_target"
-            download="download"
+            :download="field.download_name"
             ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"

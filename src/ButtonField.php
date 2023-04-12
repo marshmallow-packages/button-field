@@ -81,17 +81,17 @@ class ButtonField extends Field
         return $this->setButtonType('button');
     }
 
-<<<<<<< Updated upstream
-    public function download()
-=======
     public function text()
     {
         return $this->setButtonType('text');
     }
 
     public function download(string $download_name = null)
->>>>>>> Stashed changes
     {
+        $this->withMeta([
+            'download_name' => $download_name ?? 'download',
+        ]);
+
         return $this->setButtonType('download');
     }
 
