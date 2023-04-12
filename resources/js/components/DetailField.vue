@@ -8,9 +8,12 @@
             </h4>
         </div>
         <div class="break-all md:w-3/4 md:py-3 lg:break-words">
+            {{ resourceId }}
             <ButtonComponent
                 :field="field"
                 :resourceName="resourceName"
+                :resource="resource"
+                :resourceId="resourceId"
             ></ButtonComponent>
         </div>
     </div>
@@ -20,8 +23,15 @@
     import ButtonComponent from "./ButtonComponent";
 
     export default {
-        props: ["resourceName", "field"],
+        props: ["index", "resource", "resourceName", "resourceId", "field"],
 
         components: { ButtonComponent },
+
+        mounted() {
+            // console.log(this.resourceId);
+        },
+        created() {
+            // console.log(this.resourceId);
+        },
     };
 </script>

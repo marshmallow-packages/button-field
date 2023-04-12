@@ -8,6 +8,8 @@
             <ButtonComponent
                 :field="field"
                 :resourceName="resourceName"
+                :resource="resource"
+                :resourceId="resourceId"
             ></ButtonComponent>
         </template>
     </DefaultField>
@@ -19,7 +21,7 @@
 
     export default {
         mixins: [FormField],
-        props: ["resourceName", "field"],
+        props: ["resourceName", "field", "resource", "resourceId"],
         components: { ButtonComponent },
     };
 </script>
