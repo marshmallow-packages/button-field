@@ -2,8 +2,10 @@
 
 namespace Marshmallow\ButtonField;
 
+use Exception;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Marshmallow\ButtonField\Contracts\OnClickInterface;
 
 class ButtonField extends Field
 {
@@ -22,6 +24,7 @@ class ButtonField extends Field
             ->button()
             ->available(true)
             ->notAvailableText('n/a')
+            ->useFieldValue(false)
             ->target('_blank')
             ->fillUsing(function () {
                 // Disable updates on the model
@@ -37,6 +40,14 @@ class ButtonField extends Field
             $this->available(false)
                 ->notAvailableText($not_available_text);
         }
+        return $this;
+    }
+
+    public function useFieldValue(bool $use_field_value = false)
+    {
+        $this->withMeta([
+            'use_field_value' => $use_field_value,
+        ]);
         return $this;
     }
 
@@ -70,7 +81,16 @@ class ButtonField extends Field
         return $this->setButtonType('button');
     }
 
+<<<<<<< Updated upstream
     public function download()
+=======
+    public function text()
+    {
+        return $this->setButtonType('text');
+    }
+
+    public function download(string $download_name = null)
+>>>>>>> Stashed changes
     {
         return $this->setButtonType('download');
     }
@@ -88,6 +108,28 @@ class ButtonField extends Field
     {
         $this->withMeta([
             'button_type' => $type,
+        ]);
+
+        return $this;
+    }
+
+    public function onClick(string $action_class_name)
+    {
+        if (!new $action_class_name instanceof OnClickInterface) {
+            throw new Exception("{$action_class_name} should implement the OnClickInterface interface", 1);
+        }
+
+        $this->withMeta([
+            'action_class_name' => $action_class_name,
+        ]);
+
+        return $this;
+    }
+
+    public function icon(string $icon)
+    {
+        $this->withMeta([
+            'icon' => $icon,
         ]);
 
         return $this;
