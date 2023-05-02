@@ -34,9 +34,11 @@ class ButtonField extends Field
             );
     }
 
-    public function visibleWhen(callable $callable, string $not_available_text)
+    public function visibleWhen(callable $callable, string|callable $not_available_text)
     {
         if (!$callable()) {
+            $not_available_text = is_callable($not_available_text) ? $not_available_text() : $not_available_text;
+
             $this->available(false)
                 ->notAvailableText($not_available_text);
         }
