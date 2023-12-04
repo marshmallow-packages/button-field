@@ -97,9 +97,19 @@
 
                 formData.append("action_class", this.field.action_class_name);
 
+                let resourceId = this.resourceId;
+
+                if (!resourceId && this.$parent.$parent.resource) {
+                    resourceId = this.$parent.$parent.resource.id.value;
+                }
+
+                if (!resourceId && this.$parent.$parent.$parent.resource) {
+                    resourceId = this.$parent.$parent.$parent.resource.id.value;
+                }
+
                 return Nova.request()
                     .post(
-                        `/nova-vendor/button-field/${this.resourceName}/${this.$parent.$parent.$parent.resource.id.value}`,
+                        `/nova-vendor/button-field/${this.resourceName}/${resourceId}`,
                         formData
                     )
                     .then(
