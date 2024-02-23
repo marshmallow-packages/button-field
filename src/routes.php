@@ -11,7 +11,11 @@ Route::post('/{resourceName}/{resourceId}', function ($resourceName, $resourceId
 
     try {
         $action_class = new $request->action_class;
-        $action_class->execute($model);
+        $action_class->execute(
+            $model,
+            $request->button_value,
+            $request->button_key,
+        );
         return [
             'success' => true,
             'message' => $action_class->success(),
