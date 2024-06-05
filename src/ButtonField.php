@@ -4,6 +4,7 @@ namespace Marshmallow\ButtonField;
 
 use Exception;
 use Laravel\Nova\Fields\Field;
+use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Marshmallow\ButtonField\Contracts\OnClickInterface;
 
@@ -32,6 +33,15 @@ class ButtonField extends Field
             ->setButtonText(
                 __('Download')
             );
+    }
+
+    public function action(Action $action, mixed $resourceId, string $label = null): self
+    {
+        return $this->withMeta([
+            'action' => $action,
+            'resourceId' => $resourceId,
+            'actionLabel' => $label,
+        ]);
     }
 
     public function visibleWhen(callable $callable, string|callable $not_available_text)

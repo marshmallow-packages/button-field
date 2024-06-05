@@ -115,6 +115,19 @@ class SendInvoice implements OnClickInterface
 }
 ```
 
+### Run Nova Actions
+
+You can now run your Nova Actions using the button field. This means its now possible to run a nova action from the form view as well. Make sure the action is registered in your resources actions method and then use the example code below.
+
+```php
+ButtonField::make(__('Nova Action'))
+    ->action(
+        action: new \App\Nova\Actions\DemoAction,
+        resourceId: $this->resource->id,
+        label: 'Run the demo dude!'
+    ),
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
