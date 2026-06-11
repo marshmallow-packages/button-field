@@ -2,10 +2,12 @@
 
 # Nova Button Package
 
-[![Version](https://img.shields.io/packagist/v/marshmallow/button-field)](https://github.com/marshmallow-packages/button-field)
-[![Issues](https://img.shields.io/github/issues/marshmallow-packages/button-field)](https://github.com/marshmallow-packages/button-field)
-[![Code Coverage](https://img.shields.io/badge/coverage-100%25-success)](https://github.com/marshmallow-packages/button-field)
-[![Licence](https://img.shields.io/github/license/marshmallow-packages/button-field)](https://github.com/marshmallow-packages/button-field)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/marshmallow/button-field.svg?style=flat-square)](https://packagist.org/packages/marshmallow/button-field)
+[![Total Downloads](https://img.shields.io/packagist/dt/marshmallow/button-field.svg?style=flat-square)](https://packagist.org/packages/marshmallow/button-field)
+[![Issues](https://img.shields.io/github/issues/marshmallow-packages/button-field?style=flat-square)](https://github.com/marshmallow-packages/button-field/issues)
+[![License](https://img.shields.io/packagist/l/marshmallow/button-field?style=flat-square)](https://github.com/marshmallow-packages/button-field)
+
+A Laravel Nova field that renders a button on your resource — link out, trigger a download, run a Nova action, or execute custom code on click.
 
 ## Installation
 
@@ -17,14 +19,17 @@ composer require marshmallow/button-field
 
 ## Usage
 
-By default this package will resolve the link from the column you provide when calling the make method. By calling the `resolveUsing` method you can return your own generated link to the button.
+Add the field to your Nova resource. By default the field resolves its link from the column you pass to `make()`. As with any Nova field, you can return your own value with `resolveUsing()`.
 
 ```php
 use Marshmallow\ButtonField\ButtonField;
+
 ButtonField::make('Certificate')->resolveUsing(function () {
     return '___YOUR_LINK_GOES_HERE___';
 }),
 ```
+
+The field is hidden on the create form and never writes back to the model (its `fillUsing` is a no-op), so it is safe to use as a pure action/link field.
 
 ## Methods
 
@@ -59,6 +64,22 @@ The default text of the created button is “Download”. You can change this by
 
 ```php
 $button_field->setButtonText('Go to user profile');
+```
+
+### text()
+
+Call the `text` method to render the button as a plain text-style button instead of the default Nova button. This is the type required by the `onClick` method below.
+
+```php
+$button_field->text();
+```
+
+### icon()
+
+Add an icon to the button by passing an icon name to the `icon` method.
+
+```php
+$button_field->icon('download');
 ```
 
 ### visibleWhen()
@@ -96,7 +117,7 @@ use Marshmallow\ButtonField\Contracts\OnClickInterface;
 
 class SendInvoice implements OnClickInterface
 {
-    public function execute(Model $model): void
+    public function execute(Model $model, $value = null, $key = null): void
     {
         // Run your code!
     }
@@ -132,12 +153,6 @@ ButtonField::make(__('Nova Action'))
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-## Testing
-
-```bash
-composer test
-```
-
 ## Security
 
 If you discover any security related issues, please email stef@marshmallow.dev instead of using the issue tracker.
@@ -149,4 +164,4 @@ If you discover any security related issues, please email stef@marshmallow.dev i
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+The MIT License (MIT).
